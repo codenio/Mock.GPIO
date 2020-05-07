@@ -82,12 +82,12 @@ GPIO.output(15,GPIO.LOW)
 
 generates following output
 
-```python
+```shell
 $ python examples/test.py 
 set mode
 set warning false
-Set Warings as False
-setup channel : 15 as 0 with intial :0 and pull_up_dowm 20
-output channel : 15 with value : 1
-output channel : 15 with value : 0
+2020-05-07 17:49:23,031:INFO: Set Warings as False
+2020-05-07 17:49:23,031:INFO: setup channel : 15 as 0 with intial :0 and pull_up_dowm 20
+2020-05-07 17:49:23,032:INFO: output channel : 15 with value : 1
+2020-05-07 17:49:24,033:INFO: output channel : 15 with value : 0
 ```
