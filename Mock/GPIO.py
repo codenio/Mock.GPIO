@@ -2,7 +2,10 @@
 Mock Library for RPi.GPIO
 """
 
-import time, logging, os
+import time
+import logging
+import os
+import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +58,6 @@ channel_config = {}
 #flags
 setModeDone = False
 
-
 class Channel:
     def __init__(self,channel, direction, initial=0,pull_up_down=PUD_OFF):
         self.chanel = channel
@@ -76,6 +78,7 @@ def setmode(mode):
     if(mode == BCM):
         setModeDone = True
         _mode = mode
+
     elif (mode == BOARD):
         setModeDone = True
     else:
@@ -182,6 +185,7 @@ class PWM:
         """
         self.chanel = channel
         self.frequency = frequency
+        self.dutycycle = 0
         global channel_config
         channel_config[channel] = Channel(channel,PWM,)
         logger.info("Initialized PWM for Channel : {} at frequency : {}".format(channel,frequency))

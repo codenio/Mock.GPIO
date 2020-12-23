@@ -1,14 +1,48 @@
-import setuptools
+from setuptools import setup, find_packages
 
 from distutils.util import convert_path
 
-with open('DESCRIPTION.md', 'r') as readme:
-  long_description = readme.read()
+long_description ="""
+# GPIOEmulator
 
-with open('requirements.txt', 'r') as requirements_file:
-  requirements_text = requirements_file.read()
+The easiest way to use this package is to install using pip3 for python 3
 
-requirements = requirements_text.split()
+```bash
+$ sudo pip3 install Mock.GPIO
+```
+
+To use the emulator just type the following at the beginning of your script.
+
+```python
+from Mock.GPIO import GPIO
+```
+
+## Works with
+
+- [python 3.6.8](https://www.python.org/downloads/release/3.6.8)
+
+## Simulation
+
+This library simulates the following functions which are used in the RPi.GPIO library.
+
+- GPIO.setmode()
+- GPIO.getmode()
+- GPIO.setwarnings()
+- GPIO.setup()
+- GPIO.output()
+- GPIO.input()
+- GPIO.wait_for_edge()
+- GPIO.add_event_detect()
+- GPIO.event_detected()
+- GPIO.add_event_callback()
+- GPIO.remove_event_detect()
+- GPIO.gpio_function()
+- GPIO.start()
+- GPIO.ChangeFrequency()
+- GPIO.ChangeDutyCycle()
+- GPIO.stop()
+- GPIO.cleanup()
+"""
 
 pkg_ns = {}
 
@@ -16,7 +50,7 @@ ver_path = convert_path('Mock/__init__.py')
 with open(ver_path) as ver_file:
     exec(ver_file.read(), pkg_ns)
 
-setuptools.setup(
+setup(
       name='Mock.GPIO',
       version=pkg_ns['__version__'],
       description='Mock Library for RPi.GPIO',
@@ -24,9 +58,11 @@ setuptools.setup(
       author='Aananth K',
       author_email='aananthraj1995@gmail.com',
       license='GPL-3.0',
-      packages=setuptools.find_packages(),
+      packages=find_packages(exclude=[]),
+      install_requires=[
+      "PyYAML==5.3.1",
+      ],
       zip_safe=False,
       long_description_content_type="text/markdown",
       long_description=long_description,
-      install_requires=requirements
 )

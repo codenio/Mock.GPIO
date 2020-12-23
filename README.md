@@ -1,13 +1,7 @@
 # Mock.GPIO
 Mock Library for RPI.GPIO python Library
 
-The easiest way to use this package is to install using pip for python 2.7
-
-```bash
-$ sudo pip install Mock.GPIO
-```
-
-using pip3 for python 3
+The easiest way to use this package is to install using pip3 for python 3
 
 ```bash
 $ sudo pip3 install Mock.GPIO
@@ -21,7 +15,6 @@ from Mock.GPIO import GPIO
 
 ## Works with
 
-- [python 2.7.15+](https://www.python.org/downloads/release/python-2715/)
 - [python 3.6.8](https://www.python.org/downloads/release/3.6.8)
 
 ## Simulation
@@ -70,9 +63,9 @@ except:
 
 import time
 
-print "set mode"
+print ("set mode")
 GPIO.setmode(GPIO.BCM)
-print "set warning false"
+print ("set warning false")
 GPIO.setwarnings(False)
 GPIO.setup(15,GPIO.OUT)
 GPIO.output(15,GPIO.HIGH)
@@ -83,6 +76,7 @@ GPIO.output(15,GPIO.LOW)
 generates following output
 
 ```shell
+$ export LOG_LEVEL=Info
 $ python examples/test.py 
 set mode
 set warning false

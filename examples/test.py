@@ -5,9 +5,9 @@ except:
 
 import time
 
-print "set mode"
+print("set mode")
 GPIO.setmode(GPIO.BCM)
-print "set warning false"
+print("set warning false")
 GPIO.setwarnings(False)
 GPIO.setup(15,GPIO.OUT)
 GPIO.output(15,GPIO.HIGH)
