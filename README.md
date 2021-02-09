@@ -1,6 +1,13 @@
 # Mock.GPIO
 Mock Library for RPI.GPIO python Library
 
+Mock.GPIO is a python library that supports development of software/program and to debug them outside RPi (eg: ubuntu ). it can be intergrated along with any generic application/program/software.
+
+it help in making your program/application run seamlessly both outside and inside RPi by
+- Printing the intended actions (without GUI) for debugging, when executed outside RPi
+- Works exactly as intended in an actual RPi without a need for code change.
+
+
 The easiest way to use this package is to install using pip3 for python 3
 
 ```bash
@@ -57,7 +64,7 @@ The following python example/test.py
 ```python
 
 try:
-    import RPi.GPIO as GPIO    
+    import RPi.GPIO as GPIO
 except:
     import Mock.GPIO as GPIO
 
@@ -77,7 +84,7 @@ generates following output
 
 ```shell
 $ export LOG_LEVEL=Info
-$ python examples/test.py 
+$ python examples/test.py
 set mode
 set warning false
 2020-05-07 17:49:23,031:INFO: Set Warings as False
