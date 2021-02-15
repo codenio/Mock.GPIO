@@ -14,10 +14,24 @@ The easiest way to use this package is to install using pip3 for python 3
 $ sudo pip3 install Mock.GPIO
 ```
 
-To use the emulator just type the following at the beginning of your script.
+To import the Mock library at the beginning of your script, use
 
 ```python
 from Mock.GPIO import GPIO
+```
+
+or
+
+To enable seamless switching between Mock library when you are outside RPi and the actual RPi.GPIO library when you are inside RPi, use
+
+```python
+
+try:
+    # checks if you have access to RPi.GPIO, which is available inside RPi
+    import RPi.GPIO as GPIO
+except:
+    # In case of exception, It realises that, you are executing your script outside, so imports Mock.GPIO
+    import Mock.GPIO as GPIO
 ```
 
 ## Works with
