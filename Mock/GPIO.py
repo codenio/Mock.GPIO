@@ -5,7 +5,6 @@ Mock Library for RPi.GPIO
 import time
 import logging
 import os
-import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -189,7 +188,7 @@ class PWM:
         global channel_config
         channel_config[channel] = Channel(channel,PWM,)
         logger.info("Initialized PWM for Channel : {} at frequency : {}".format(channel,frequency))
-    
+
     # where dc is the duty cycle (0.0 <= dc <= 100.0)
     def start(self, dutycycle):
         """
@@ -198,7 +197,7 @@ class PWM:
         """
         self.dutycycle = dutycycle
         logger.info("start pwm on channel : {} with Duty cycle : {}".format(self.chanel,dutycycle))
-    
+
     # where freq is the new frequency in Hz
     def ChangeFrequency(self, frequency):
         """
@@ -216,7 +215,7 @@ class PWM:
         """
         self.dutycycle = dutycycle
         logger.info("Dutycycle Changed for channel : {} from : {} -> to : {}".format(self.chanel,self.dutycycle,dutycycle))
-    
+
     # stop PWM generation
     def stop(self):
         logger.info("Stop pwm on channel : {} with Duty cycle : {}".format(self.chanel,self.dutycycle))

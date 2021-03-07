@@ -59,9 +59,7 @@ setup(
       author_email='aananthraj1995@gmail.com',
       license='GPL-3.0',
       packages=find_packages(exclude=[]),
-      install_requires=[
-      "PyYAML==5.3.1",
-      ],
+      install_requires=[],
       zip_safe=False,
       long_description_content_type="text/markdown",
       long_description=long_description,
