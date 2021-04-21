@@ -106,3 +106,18 @@ set warning false
 2020-05-07 17:49:23,032:INFO: output channel : 15 with value : 1
 2020-05-07 17:49:24,033:INFO: output channel : 15 with value : 0
 ```
+
+## Develope
+
+- make the suitable changes and from the root directory of this repository, install the Mock.GPIO python package using the install.sh script
+    ```bash
+    $ sudo ./scripts/install.sh
+    ```
+
+## Contribute
+
+- You've discovered a bug or something else you want to change - excellent! - feel free to raise a issue.
+- You've worked out a way to fix it – even better! - submit your PR
+- You want to tell us about it – best of all!
+
+Start contributing !
