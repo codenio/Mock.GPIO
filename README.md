@@ -17,7 +17,7 @@ $ sudo pip3 install Mock.GPIO
 To import the Mock library at the beginning of your script, use
 
 ```python
-from Mock.GPIO import GPIO
+import Mock.GPIO as GPIO
 ```
 
 To enable seamless switching between Mock library when you are outside RPi and the actual RPi.GPIO library when you are inside RPi, use
