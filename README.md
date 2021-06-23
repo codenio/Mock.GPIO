@@ -17,7 +17,7 @@ $ sudo pip3 install Mock.GPIO
 To import the Mock library at the beginning of your script, use
 
 ```python
-from Mock.GPIO import GPIO
+import Mock.GPIO as GPIO
 ```
 
 or
