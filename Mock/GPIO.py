@@ -59,7 +59,7 @@ setModeDone = False
 
 class Channel:
     def __init__(self,channel, direction, initial=0,pull_up_down=PUD_OFF):
-        self.chanel = channel
+        self.channel = channel
         self.direction = direction
         self.initial = initial
         self.pull_up_down = pull_up_down
@@ -94,18 +94,18 @@ def setwarnings(flag):
     """
     Enable or disable warning messages
     """
-    logger.info("Set Warings as {}".format(flag))
+    logger.info("Set warnings as {}".format(flag))
 
 def setup(channel, direction, initial=0,pull_up_down=PUD_OFF):
     """
-    Set up a GPIO channel or list of channels with a direction and (optional) pull/up down control
+    Set up a GPIO channel or list of channels with a direction and (optional) pull up/down control
     channel        - either board pin number or BCM number depending on which mode is set.
     direction      - IN or OUT
     [pull_up_down] - PUD_OFF (default), PUD_UP or PUD_DOWN
     [initial]      - Initial value for an output channel
 
     """
-    logger.info("setup channel : {} as {} with intial :{} and pull_up_dowm {}".format(channel,direction,initial,pull_up_down))
+    logger.info("Setup channel : {} as {} with initial :{} and pull_up_down {}".format(channel,direction,initial,pull_up_down))
     global channel_config
     channel_config[channel] = Channel(channel, direction, initial, pull_up_down)
 
@@ -116,14 +116,14 @@ def output(channel, value):
     value   - 0/1 or False/True or LOW/HIGH
 
     """
-    logger.info("output channel : {} with value : {}".format(channel, value))
+    logger.info("Output channel : {} with value : {}".format(channel, value))
 
 def input(channel):
     """
     Input from a GPIO channel.  Returns HIGH=1=True or LOW=0=False
     channel - either board pin number or BCM number depending on which mode is set.
     """
-    logger.info("reading from chanel {}".format(channel))
+    logger.info("Reading from channel {}".format(channel))
 
 def wait_for_edge(channel,edge,bouncetime,timeout):
     """
@@ -133,7 +133,7 @@ def wait_for_edge(channel,edge,bouncetime,timeout):
     [bouncetime] - time allowed between calls to allow for switchbounce
     [timeout]    - timeout in ms
     """
-    logger.info("waiting for edge : {} on channel : {} with bounce time : {} and Timeout :{}".format(edge,channel,bouncetime,timeout))
+    logger.info("Waiting for edge : {} on channel : {} with bounce time : {} and Timeout :{}".format(edge,channel,bouncetime,timeout))
 
 
 def add_event_detect(channel,edge,callback,bouncetime):
@@ -144,7 +144,7 @@ def add_event_detect(channel,edge,callback,bouncetime):
     [callback]   - A callback function for the event (optional)
     [bouncetime] - Switch bounce timeout in ms for callback
     """
-    logger.info("Event detect added for edge : {} on channel : {} with bouce time : {} and callback {}".format(edge,channel,bouncetime,callback))
+    logger.info("Event detect added for edge : {} on channel : {} with bounce time : {} and callback {}".format(edge,channel,bouncetime,callback))
 
 def event_detected(channel):
     """
@@ -159,21 +159,21 @@ def add_event_callback(channel,callback):
     channel      - either board pin number or BCM number depending on which mode is set.
     callback     - a callback function
     """
-    logger.info("Event Calback : {} added for channel : {}".format(callback,channel))
+    logger.info("Event callback : {} added for channel : {}".format(callback,channel))
 
 def remove_event_detect(channel):
     """
     Remove edge detection for a particular GPIO channel
     channel - either board pin number or BCM number depending on which mode is set.
     """
-    logger.info("Event Detect Removed for channel : {}".format(channel))
+    logger.info("Event detect removed for channel : {}".format(channel))
 
 def gpio_function(channel):
     """
     Return the current GPIO function (IN, OUT, PWM, SERIAL, I2C, SPI)
     channel - either board pin number or BCM number depending on which mode is set.
     """
-    logger.info("GPIO function of Channel : {} is {}".format(channel,channel_config[channel].direction))
+    logger.info("GPIO function of channel : {} is {}".format(channel,channel_config[channel].direction))
 
 
 class PWM:
@@ -182,12 +182,12 @@ class PWM:
         """
         x.__init__(...) initializes x; see help(type(x)) for signature
         """
-        self.chanel = channel
+        self.channel = channel
         self.frequency = frequency
         self.dutycycle = 0
         global channel_config
         channel_config[channel] = Channel(channel,PWM,)
-        logger.info("Initialized PWM for Channel : {} at frequency : {}".format(channel,frequency))
+        logger.info("Initialized PWM for channel : {} at frequency : {}".format(channel,frequency))
 
     # where dc is the duty cycle (0.0 <= dc <= 100.0)
     def start(self, dutycycle):
@@ -196,7 +196,7 @@ class PWM:
         dutycycle - the duty cycle (0.0 to 100.0)
         """
         self.dutycycle = dutycycle
-        logger.info("start pwm on channel : {} with Duty cycle : {}".format(self.chanel,dutycycle))
+        logger.info("Start pwm on channel : {} with duty cycle : {}".format(self.channel,dutycycle))
 
     # where freq is the new frequency in Hz
     def ChangeFrequency(self, frequency):
@@ -204,7 +204,7 @@ class PWM:
         Change the frequency
         frequency - frequency in Hz (freq > 1.0)
         """
-        logger.info("Freqency Changed for channel : {} from : {} -> to : {}".format(self.chanel,self.frequency,frequency))
+        logger.info("Freqency changed for channel : {} from : {} -> to : {}".format(self.channel,self.frequency,frequency))
         self.frequency = frequency
 
     # where 0.0 <= dc <= 100.0
@@ -214,11 +214,11 @@ class PWM:
         dutycycle - between 0.0 and 100.0
         """
         self.dutycycle = dutycycle
-        logger.info("Dutycycle Changed for channel : {} from : {} -> to : {}".format(self.chanel,self.dutycycle,dutycycle))
+        logger.info("Dutycycle changed for channel : {} from : {} -> to : {}".format(self.channel,self.dutycycle,dutycycle))
 
     # stop PWM generation
     def stop(self):
-        logger.info("Stop pwm on channel : {} with Duty cycle : {}".format(self.chanel,self.dutycycle))
+        logger.info("Stop PWM on channel : {} with duty cycle : {}".format(self.channel,self.dutycycle))
 
 
 def cleanup(channel=None):
@@ -227,6 +227,6 @@ def cleanup(channel=None):
     [channel] - individual channel or list/tuple of channels to clean up.  Default - clean every channel that has been used.
     """
     if channel is not None:
-        logger.info("Cleaning Up Channel : {}".format(channel))
+        logger.info("Cleaning up channel : {}".format(channel))
     else:
-        logger.info("Cleaning Up all channels")
+        logger.info("Cleaning up all channels")
