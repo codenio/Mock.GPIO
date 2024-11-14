@@ -135,7 +135,7 @@ def wait_for_edge(channel,edge,bouncetime,timeout):
     logger.info("Waiting for edge : {} on channel : {} with bounce time : {} and Timeout :{}".format(edge,channel,bouncetime,timeout))
 
 
-def add_event_detect(channel,edge,callback,bouncetime):
+def add_event_detect(channel,edge,callback=None,bouncetime=None):
     """
     Enable edge detection events for a particular GPIO channel.
     channel      - either board pin number or BCM number depending on which mode is set.
