@@ -112,6 +112,17 @@ make the suitable changes and from the root directory of this repository, instal
 ```bash
 $ sudo ./scripts/install.sh
 ```
+## Simulate input
+
+This make it possible to simulate input to a GPIO pin, e.g. pressing a button. 
+
+echo "[GPIO]:[HI|LOW]" > /dev/tcp/{host}/{port}
+
+The port is hardcoded to 5566
+
+example:
+echo "18:LOW" > /dev/tcp/192.168.122.143/5566
+
 
 ## Contribute
 
