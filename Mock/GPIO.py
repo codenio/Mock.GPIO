@@ -11,15 +11,15 @@ logger = logging.getLogger(__name__)
 log_level = os.getenv('LOG_LEVEL')
 
 if log_level is not None:
-    if log_level == "Info":
+    if log_level.lower() == "info":
         logger.setLevel(logging.INFO)
-    if log_level == "Debug":
+    if log_level.lower() == "debug":
         logger.setLevel(logging.DEBUG)
-    if log_level == "Warning":
+    if log_level.lower() == "warning":
         logger.setLevel(logging.WARNING)
-    if log_level == "Error":
+    if log_level.lower() == "error":
         logger.setLevel(logging.ERROR)
-    if log_level == "Critical":
+    if log_level.lower() == "critical":
         logger.setLevel(logging.CRITICAL)
 else:
     logger.setLevel(logging.ERROR)
@@ -95,27 +95,46 @@ def setwarnings(flag):
     """
     logger.info("Set warnings as {}".format(flag))
 
-def setup(channel, direction, initial=0,pull_up_down=PUD_OFF):
+def setup(channels, direction, initial=0,pull_up_down=PUD_OFF):
     """
     Set up a GPIO channel or list of channels with a direction and (optional) pull up/down control
-    channel        - either board pin number or BCM number depending on which mode is set.
+    channels        - either board pin number or BCM number depending on which mode is set.
     direction      - IN or OUT
     [pull_up_down] - PUD_OFF (default), PUD_UP or PUD_DOWN
     [initial]      - Initial value for an output channel
 
     """
-    logger.info("Setup channel : {} as {} with initial :{} and pull_up_down {}".format(channel,direction,initial,pull_up_down))
     global channel_config
-    channel_config[channel] = Channel(channel, direction, initial, pull_up_down)
 
-def output(channel, value):
+    if type(channels) is list or type(channels) is tuple:
+        for channel in channels:
+            logger.info("Setup channel : {} as {} with initial :{} and pull_up_down {}".format(channel,direction,initial,pull_up_down))
+            channel_config[channel] = Channel(channel, direction, initial, pull_up_down)
+    else:
+        logger.info("Setup channel : {} as {} with initial :{} and pull_up_down {}".format(channels,direction,initial,pull_up_down))
+        channel_config[channels] = Channel(channels, direction, initial, pull_up_down)
+
+def output(channels, values):
     """
     Output to a GPIO channel or list of channels
-    channel - either board pin number or BCM number depending on which mode is set.
-    value   - 0/1 or False/True or LOW/HIGH
+    channels - either board pin number or BCM number depending on which mode is set.
+    values   - 0/1 or False/True or LOW/HIGH
 
     """
-    logger.info("Output channel : {} with value : {}".format(channel, value))
+    if type(channels) is list or type(channels) is tuple:
+        for channel in channels:
+            if type(values) is list or type(values) is tuple:
+                for value in values:
+                    logger.info("Output channel : {} with value : {}".format(channel, value))
+            else:
+                logger.info("Output channel : {} with value : {}".format(channel, values))
+    else:
+        if type(values) is list or type(values) is tuple:
+            for value in values:
+                logger.info("Output channel : {} with value : {}".format(channel, value))
+        else:
+            logger.info("Output channel : {} with value : {}".format(channel, values))
+        
 
 def input(channel):
     """
@@ -220,12 +239,16 @@ class PWM:
         logger.info("Stop PWM on channel : {} with duty cycle : {}".format(self.channel,self.dutycycle))
 
 
-def cleanup(channel=None):
+def cleanup(channels=None):
     """
     Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and no event detection
-    [channel] - individual channel or list/tuple of channels to clean up.  Default - clean every channel that has been used.
+    [channels] - individual channel or list/tuple of channels to clean up.  Default - clean every channel that has been used.
     """
-    if channel is not None:
-        logger.info("Cleaning up channel : {}".format(channel))
+    if channels is not None:
+        if type(channels) is list or type(channels) is tuple:
+            for channel in channels:
+                logger.info("Cleaning up channel : {}".format(channel))
+        else:
+            logger.info("Cleaning up channel : {}".format(channels))
     else:
         logger.info("Cleaning up all channels")
