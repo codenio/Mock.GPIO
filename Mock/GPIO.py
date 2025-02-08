@@ -131,9 +131,9 @@ def output(channels, values):
     else:
         if type(values) is list or type(values) is tuple:
             for value in values:
-                logger.info("Output channel : {} with value : {}".format(channel, value))
+                logger.info("Output channel : {} with value : {}".format(channels, value))
         else:
-            logger.info("Output channel : {} with value : {}".format(channel, values))
+            logger.info("Output channel : {} with value : {}".format(channels, values))
         
 
 def input(channel):
