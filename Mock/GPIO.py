@@ -73,6 +73,8 @@ def setmode(mode):
     BCM   - Use Broadcom GPIO 00..nn numbers
     """
     # GPIO = GPIO()
+    global setModeDone
+    global _mode
     if(mode == BCM):
         setModeDone = True
         _mode = mode
