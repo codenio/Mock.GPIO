@@ -133,8 +133,7 @@ def output(channels, values):
             for value in values:
                 logger.info("Output channel : {} with value : {}".format(channels, value))
         else:
-            logger.info("Output channel : {} with value : {}".format(channels, values))
-
+            logger.info("Output channel : {} with value : {}".format(channels, values)
 
 def input(channel):
     """
