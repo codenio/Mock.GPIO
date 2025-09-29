@@ -1,6 +1,6 @@
 # Mock.GPIO
 
-[![CircleCI](https://circleci.com/gh/codenio/Mock.GPIO.svg?style=svg)](https://circleci.com/gh/codenio/Mock.GPIO)
+[![CI](https://github.com/codenio/Mock.GPIO/actions/workflows/ci.yml/badge.svg)](https://github.com/codenio/Mock.GPIO/actions/workflows/ci.yml)
 
 Mock Library for RPi.GPIO.
 
