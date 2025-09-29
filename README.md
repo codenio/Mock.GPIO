@@ -1,5 +1,7 @@
 # Mock.GPIO
 
+[![CircleCI](https://circleci.com/gh/codenio/Mock.GPIO.svg?style=svg)](https://circleci.com/gh/codenio/Mock.GPIO)
+
 Mock Library for RPi.GPIO.
 
 Mock.GPIO helps you develop and debug GPIO-dependent code outside a Raspberry Pi (e.g. on macOS/Linux) while keeping the same API as `RPi.GPIO`. It prints intended actions when running off-device and works as a drop-in replacement on-device without code changes.
