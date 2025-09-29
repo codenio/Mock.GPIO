@@ -1,13 +1,22 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches-ignore:
-      - "dependabot/**"
+    branches: [master]
   pull_request:
+    branches: [master]
+  workflow_dispatch:
 
 jobs:
+  codespell_and_ruff:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: codespell-project/actions-codespell@v2
+    - uses: astral-sh/ruff-action@v3
+
   pytest:
+    needs: codespell_and_ruff
     timeout-minutes: 10
     runs-on: 'ubuntu-latest'
     strategy:
