@@ -1,4 +1,7 @@
 # LOG_LEVEL=Info PYTHONPATH=. uv run pytest
+#
+# Copyright (c) 2025 codenio ( Aananth K )
+# SPDX-License-Identifier: GPL-3.0-only
 
 """
 Pytest tests for Mock.GPIO module.

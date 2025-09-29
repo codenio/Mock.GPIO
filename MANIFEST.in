@@ -1,3 +1,5 @@
+# Copyright (c) 2025 codenio ( Aananth K )
+# SPDX-License-Identifier: GPL-3.0-only
 include README.md
 include LICENSE
 recursive-include docs *.html

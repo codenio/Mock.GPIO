@@ -41,29 +41,40 @@ GPIO.output(15, GPIO.HIGH)
 
 ## Development
 
-This repo includes a standard `Makefile`.
+Minimal `Makefile` targets:
 
 ```bash
-# one-time setup
-make requirements
-
-# run tests
-make test
-
-# install locally (editable)
-make dev-install
-
-# build & publish
-make build
-make publish-test
-make publish
+make help          # list targets
+make install       # local install via scripts/install.sh
+make test          # run pytest
+make clean         # remove build artifacts
+make build         # build sdist and wheel
+make publish-test  # upload to Test PyPI
+make publish       # upload to PyPI
 ```
 
-Alternatively, you can use the scripts under `scripts/` directly.
+### Test across Python versions (tox + pyenv)
+
+```bash
+# install interpreters
+pyenv install 3.10.14 3.11.9 3.12.6 3.13.0 pypy3.11-7.3.17
+eval "$(pyenv init -)"
+pyenv local 3.10.14 3.11.9 3.12.6 3.13.0 pypy3.11-7.3.17
+
+# run tox matrix
+make tox
+```
+
+Note: Runtime `dependencies` are intentionally empty to avoid issues on PyPy (e.g., `nh3`/PyO3). Dev and packaging tools are installed separately.
 
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a PR.
+
+## Thanks to contributors
+
+Thanks to all the amazing contributors who make this project better. See the full list on the
+[Contributors page](https://github.com/codenio/Mock.GPIO/graphs/contributors).
 
 ## License
 
