@@ -223,7 +223,7 @@ class PWM:
         Change the frequency
         frequency - frequency in Hz (freq > 1.0)
         """
-        logger.info("Freqency changed for channel : {} from : {} -> to : {}".format(self.channel,self.frequency,frequency))
+        logger.info("Frequency changed for channel : {} from : {} -> to : {}".format(self.channel,self.frequency,frequency))
         self.frequency = frequency
 
     # where 0.0 <= dc <= 100.0
