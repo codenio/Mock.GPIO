@@ -1,4 +1,6 @@
 [build-system]
+# Copyright (c) 2025 codenio ( Aananth K )
+# SPDX-License-Identifier: GPL-3.0-only
 requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
@@ -9,7 +11,8 @@ readme = "README.md"
 license = "GPL-3.0-only"
 authors = [{ name = "Aananth K", email = "aananthraj1995@gmail.com" }]
 requires-python = ">=3.8"
-dynamic = ["version", "dependencies"]
+dynamic = ["version"]
+dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/codenio/Mock.GPIO"
@@ -21,7 +24,6 @@ packages = { find = { where = ["."], include = ["Mock*"], exclude = ["tests*"] }
 
 [tool.setuptools.dynamic]
 version = { attr = "Mock.__version__" }
-dependencies = { file = ["requirements.txt"] }
 
 [tool.pytest.ini_options]
 minversion = "7.0"

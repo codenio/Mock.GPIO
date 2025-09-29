@@ -1,4 +1,6 @@
 # Mock.GPIO Makefile
+# Copyright (c) 2025 codenio ( Aananth K )
+# SPDX-License-Identifier: GPL-3.0-only
 
 .DEFAULT_GOAL := help
 .PHONY: help install test clean build publish publish-test tox
