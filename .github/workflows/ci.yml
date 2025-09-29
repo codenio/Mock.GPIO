@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+  pull_request:
+
+jobs:
+  pytest:
+    timeout-minutes: 10
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.11', '3.12', '3.13', '3.14', 'pypy-3.11']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '${{ matrix.python }}'
+          allow-prereleases: true
+      - run: pip install --upgrade pip
+      - run: pip install pytest --editable .
+      - run: LOG_LEVEL=Info pytest
