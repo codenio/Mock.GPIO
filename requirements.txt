@@ -16,7 +16,7 @@ nh3==0.2.18
 pkginfo==1.10.0
 Pygments==2.18.0
 readme_renderer==44.0
-requests==2.32.3
+requests==2.32.4
 requests-toolbelt==1.0.0
 rfc3986==2.0.0
 rich==13.9.4
