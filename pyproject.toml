@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Mock.GPIO"
+description = "Mock Library for RPi.GPIO"
+readme = "README.md"
+license = "GPL-3.0-only"
+authors = [{ name = "Aananth K", email = "aananthraj1995@gmail.com" }]
+requires-python = ">=3.8"
+dynamic = ["version", "dependencies"]
+
+[project.urls]
+Homepage = "https://github.com/codenio/Mock.GPIO"
+Repository = "https://github.com/codenio/Mock.GPIO"
+Issues = "https://github.com/codenio/Mock.GPIO/issues"
+
+[tool.setuptools]
+packages = { find = { where = ["."], include = ["Mock*"], exclude = ["tests*"] } }
+
+[tool.setuptools.dynamic]
+version = { attr = "Mock.__version__" }
+dependencies = { file = ["requirements.txt"] }
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+

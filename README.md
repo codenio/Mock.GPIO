@@ -1,122 +1,70 @@
 # Mock.GPIO
-Mock Library for RPI.GPIO python Library
 
-Mock.GPIO is a python library that supports development of software/program and to debug them outside RPi (eg: ubuntu ). It can be integrated along with any generic application/program/software.
+Mock Library for RPi.GPIO.
 
-It helps in making your program/application run seamlessly, both outside and inside RPi by
-- printing the intended actions (without GUI) for debugging, when executed outside RPi
-- works exactly as intended in an actual RPi without a need for code change.
+Mock.GPIO helps you develop and debug GPIO-dependent code outside a Raspberry Pi (e.g. on macOS/Linux) while keeping the same API as `RPi.GPIO`. It prints intended actions when running off-device and works as a drop-in replacement on-device without code changes.
 
-
-The easiest way to use this package is to install using pip3 for python3
+### Installation
 
 ```bash
-$ sudo pip3 install Mock.GPIO
+pip3 install Mock.GPIO
 ```
 
-To import the Mock library at the beginning of your script, use
+### Quick start
 
 ```python
-import Mock.GPIO as GPIO
-```
-
-To enable seamless switching between Mock library when you are outside RPi and the actual RPi.GPIO library when you are inside RPi, use
-
-```python
-
 try:
-    # checks if you have access to RPi.GPIO, which is available inside RPi
     import RPi.GPIO as GPIO
-except:
-    # In case of exception, you are executing your script outside of RPi, so import Mock.GPIO
+except Exception:
     import Mock.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(15, GPIO.OUT)
+GPIO.output(15, GPIO.HIGH)
 ```
 
-## Works with
+### Supported API surface
 
-- [python 3.6.8](https://www.python.org/downloads/release/3.6.8)
+- GPIO.setmode(), GPIO.getmode(), GPIO.setwarnings(), GPIO.setup(), GPIO.output(), GPIO.input()
+- GPIO.wait_for_edge(), GPIO.add_event_detect(), GPIO.event_detected(), GPIO.add_event_callback(), GPIO.remove_event_detect()
+- GPIO.gpio_function(), GPIO.start(), GPIO.ChangeFrequency(), GPIO.ChangeDutyCycle(), GPIO.stop(), GPIO.cleanup()
 
-## Simulation
+### Supported versions
 
-This library simulates the following functions which are used in the RPi.GPIO library.
-
-- GPIO.setmode()
-- GPIO.getmode()
-- GPIO.setwarnings()
-- GPIO.setup()
-- GPIO.output()
-- GPIO.input()
-- GPIO.wait_for_edge()
-- GPIO.add_event_detect()
-- GPIO.event_detected()
-- GPIO.add_event_callback()
-- GPIO.remove_event_detect()
-- GPIO.gpio_function()
-- GPIO.start()
-- GPIO.ChangeFrequency()
-- GPIO.ChangeDutyCycle()
-- GPIO.stop()
-- GPIO.cleanup()
-
-### Usage:
-
-``` python
-import Mock.GPIO as GPIO
-```
+- Python: 3.8–3.12
 
 ## Documentation
 
 - [Library Overview](https://htmlpreview.github.io/?https://github.com/codenio/Mock.GPIO/blob/master/docs/Mock.GPIO.html)
 - [Examples](examples)
 
-### Example:
+## Development
 
-The following python example/test.py
-
-```python
-
-try:
-    import RPi.GPIO as GPIO
-except:
-    import Mock.GPIO as GPIO
-
-import time
-
-print ("set mode")
-GPIO.setmode(GPIO.BCM)
-print ("set warning false")
-GPIO.setwarnings(False)
-GPIO.setup(15,GPIO.OUT)
-GPIO.output(15,GPIO.HIGH)
-time.sleep(1)
-GPIO.output(15,GPIO.LOW)
-```
-
-generates the following output
-
-```shell
-$ export LOG_LEVEL=Info
-$ python examples/test.py
-set mode
-set warning false
-2020-05-07 17:49:23,031:INFO: Set warnings as False
-2020-05-07 17:49:23,031:INFO: Setup channel : 15 as 0 with initial :0 and pull_up_down 20
-2020-05-07 17:49:23,032:INFO: Output channel : 15 with value : 1
-2020-05-07 17:49:24,033:INFO: Output channel : 15 with value : 0
-```
-
-## Develop
-
-make the suitable changes and from the root directory of this repository, install the Mock.GPIO python package using the install.sh script
+This repo includes a standard `Makefile`.
 
 ```bash
-$ sudo ./scripts/install.sh
+# one-time setup
+make requirements
+
+# run tests
+make test
+
+# install locally (editable)
+make dev-install
+
+# build & publish
+make build
+make publish-test
+make publish
 ```
 
-## Contribute
+Alternatively, you can use the scripts under `scripts/` directly.
 
-- You've discovered a bug or something else you want to change - excellent! - feel free to raise a issue.
-- You've worked out a way to fix it – even better! - submit your PR
-- You want to tell us about it – best of all!
+## Contributing
 
-Start contributing !
+Contributions are welcome! Please open an issue or submit a PR.
+
+## License
+
+Licensed under GPL-3.0. See `LICENSE`.

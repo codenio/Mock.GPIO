@@ -61,3 +61,8 @@ tags
 
 ### MacOS FS
 .DS_Store
+
+# Local Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
