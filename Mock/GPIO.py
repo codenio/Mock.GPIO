@@ -9,23 +9,15 @@ import os
 import logging
 
 logger = logging.getLogger(__name__)
-
-log_level = os.getenv("LOG_LEVEL")
-
-if log_level is not None:
-    if log_level.lower() == "info":
-        logger.setLevel(logging.INFO)
-    if log_level.lower() == "debug":
-        logger.setLevel(logging.DEBUG)
-    if log_level.lower() == "warning":
-        logger.setLevel(logging.WARNING)
-    if log_level.lower() == "error":
-        logger.setLevel(logging.ERROR)
-    if log_level.lower() == "critical":
-        logger.setLevel(logging.CRITICAL)
-else:
-    logger.setLevel(logging.ERROR)
-
+logger.setLevel(
+    {
+        "critical": logging.CRITICAL,
+        "debug": logging.DEBUG,
+        "error": logging.ERROR,
+        "info": logging.INFO,
+        "warning": logging.WARNING,
+    }.get(os.getenv("LOG_LEVEL", "error").lower(), logging.ERROR)
+)
 stream_formatter = logging.Formatter("%(asctime)s:%(levelname)s: %(message)s")
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(stream_formatter)
@@ -84,17 +76,11 @@ def setmode(mode):
     """
     global _mode
     global setModeDone
-    # GPIO = GPIO()
-    global setModeDone
-    global _mode
     if mode == BCM:
         setModeDone = True
         _mode = mode
-
-    elif mode == BOARD:
-        setModeDone = True
     else:
-        setModeDone = False
+        setModeDone = mode == BOARD
 
 
 def getmode():
@@ -123,7 +109,7 @@ def setup(channels, direction, initial=0, pull_up_down=PUD_OFF):
     """
     global channel_config
 
-    if type(channels) is list or type(channels) is tuple:
+    if isinstance(channels, (list, tuple)):
         for channel in channels:
             logger.info(
                 "Setup channel : {} as {} with initial :{} and pull_up_down {}".format(
@@ -147,9 +133,9 @@ def output(channels, values):
     values   - 0/1 or False/True or LOW/HIGH
 
     """
-    if type(channels) is list or type(channels) is tuple:
+    if isinstance(channels, (list, tuple)):
         for channel in channels:
-            if type(values) is list or type(values) is tuple:
+            if isinstance(values, (list, tuple)):
                 for value in values:
                     logger.info(
                         "Output channel : {} with value : {}".format(channel, value)
@@ -159,7 +145,7 @@ def output(channels, values):
                     "Output channel : {} with value : {}".format(channel, values)
                 )
     else:
-        if type(values) is list or type(values) is tuple:
+        if isinstance(values, (list, tuple)):
             for value in values:
                 logger.info(
                     "Output channel : {} with value : {}".format(channels, value)
@@ -317,7 +303,7 @@ def cleanup(channels=None):
     [channels] - individual channel or list/tuple of channels to clean up.  Default - clean every channel that has been used.
     """
     if channels is not None:
-        if type(channels) is list or type(channels) is tuple:
+        if isinstance(channels, (list, tuple)):
             for channel in channels:
                 logger.info("Cleaning up channel : {}".format(channel))
         else:
