@@ -14,8 +14,6 @@ TODO: Add tests for:
 * GPIO.gpio_function()
 """
 
-import sys
-
 import pytest
 
 try:
@@ -41,7 +39,7 @@ def test_gpio_getmode_setmode(caplog):
     assert GPIO.BCM == 11
     assert GPIO.setmode(GPIO.BCM) is None
     assert caplog.record_tuples == []  # No log messages should be generated
-    assert GPIO.getmode() == 0
+    assert GPIO.getmode() == GPIO.BCM  # Should return BCM value (11) after setting mode
     assert caplog.record_tuples == []  # No log messages should be generated
 
 
@@ -72,13 +70,9 @@ def test_gpio_output_input(caplog):
     assert GPIO.output((channel,), GPIO.LOW) is None
     assert "Output channel : 7 with value : 0" in caplog.record_tuples[-1]
 
-    # 'channel' as a single integer raises an UnboundLocalError!
-    if sys.version_info < (3, 11) or sys.implementation.name == "pypy":
-        match = "local variable 'channel' referenced before assignment"
-    else:
-        match = "cannot access local variable 'channel' where it is not associated with"
-    with pytest.raises(UnboundLocalError, match=match):
-        GPIO.output(channel, GPIO.HIGH)
+    # 'channel' as a single integer now works correctly (bug was fixed)
+    assert GPIO.output(channel, GPIO.HIGH) is None
+    assert "Output channel : 7 with value : 1" in caplog.record_tuples[-1]
 
     assert GPIO.input(channel) is None
     assert "Reading from channel 7" in caplog.record_tuples[-1]
@@ -122,9 +116,9 @@ def test_gpio_channel_out(caplog):
     assert "Output channel : 3 with value : True" in caplog.record_tuples[-1]
     assert GPIO.output((3,), False) is None
     assert "Output channel : 3 with value : False" in caplog.record_tuples[-1]
-    # This is a bug in the mock GPIO library -- see test_gpio_output_input()
-    with pytest.raises(UnboundLocalError):
-        GPIO.output(3, False)
+    # Single integer call now works correctly (bug was fixed)
+    assert GPIO.output(3, False) is None
+    assert "Output channel : 3 with value : False" in caplog.record_tuples[-1]
 
 
 def test_gpio_pulse_width_modulation(caplog):
@@ -143,7 +137,7 @@ def test_gpio_pulse_width_modulation(caplog):
     )
     assert pwm.ChangeFrequency(100) is None
     assert (
-        "Freqency changed for channel : 4 from : 50 -> to : 100"
+        "Frequency changed for channel : 4 from : 50 -> to : 100"
         in caplog.record_tuples[-1]
     )
     assert pwm.stop() is None

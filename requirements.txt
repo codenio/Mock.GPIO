@@ -10,7 +10,6 @@ jaraco.functools==4.1.0
 keyring==25.5.0
 markdown-it-py==3.0.0
 mdurl==0.1.2
-Mock.GPIO==0.1.8
 more-itertools==10.5.0
 nh3==0.2.18
 pkginfo==1.10.0
