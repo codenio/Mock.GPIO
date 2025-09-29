@@ -33,3 +33,4 @@ jobs:
       - run: pip install --upgrade pip
       - run: pip install pytest --editable .
       - run: LOG_LEVEL=Info pytest
+      - run: LOG_LEVEL=Info python examples/*.py
