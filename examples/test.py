@@ -1,6 +1,6 @@
 try:
     import RPi.GPIO as GPIO    
-except:
+except ImportError:
     import Mock.GPIO as GPIO
 
 import time

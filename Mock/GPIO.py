@@ -2,7 +2,6 @@
 Mock Library for RPi.GPIO
 """
 
-import time
 import logging
 import os
 
@@ -72,6 +71,8 @@ def setmode(mode):
     BOARD - Use Raspberry Pi board numbers
     BCM   - Use Broadcom GPIO 00..nn numbers
     """
+    global _mode
+    global setModeDone
     # GPIO = GPIO()
     global setModeDone
     global _mode
