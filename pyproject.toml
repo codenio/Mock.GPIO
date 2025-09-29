@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "Mock.GPIO"
 description = "Mock Library for RPi.GPIO"
 readme = "README.md"
-license = { text = "GPL-3.0" }
+license = "GPL-3.0-only"
 authors = [{ name = "Aananth K", email = "aananthraj1995@gmail.com" }]
 requires-python = ">=3.8"
 dynamic = ["version", "dependencies"]
@@ -20,7 +20,7 @@ Issues = "https://github.com/codenio/Mock.GPIO/issues"
 packages = { find = { where = ["."], include = ["Mock*"], exclude = ["tests*"] } }
 
 [tool.setuptools.dynamic]
-version = { file = "Mock/__init__.py", attribute = "__version__" }
+version = { attr = "Mock.__version__" }
 dependencies = { file = ["requirements.txt"] }
 
 [tool.pytest.ini_options]

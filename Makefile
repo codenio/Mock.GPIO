@@ -5,9 +5,9 @@
 .PHONY: help install test clean build publish dev-install lint format check all
 
 # Variables
-PYTHON := python3
-PIP := pip3
-PYTEST := pytest
+PYTHON := /Users/aananth.k/workspace/personal/github/Mock.GPIO/.venv/bin/python3
+PIP := /Users/aananth.k/workspace/personal/github/Mock.GPIO/.venv/bin/pip3
+PYTEST := /Users/aananth.k/workspace/personal/github/Mock.GPIO/.venv/bin/pytest
 SCRIPTS_DIR := scripts
 
 # Colors for output
@@ -67,6 +67,7 @@ publish: ## Push to PyPI (uses scripts/updatepip.sh)
 	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
 		echo ""; \
 		chmod +x $(SCRIPTS_DIR)/updatepip.sh; \
+		set -e; \
 		./$(SCRIPTS_DIR)/updatepip.sh; \
 		echo "$(GREEN)✓ Published to PyPI$(RESET)"; \
 	else \
