@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+recursive-include docs *.html
+recursive-include examples *.py
+recursive-include Mock *.py
+global-exclude __pycache__ *.py[cod]
+
+
