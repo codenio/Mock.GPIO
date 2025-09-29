@@ -29,12 +29,13 @@ GPIO.output(15, GPIO.HIGH)
 ### Supported API surface
 
 - GPIO.setmode(), GPIO.getmode(), GPIO.setwarnings(), GPIO.setup(), GPIO.output(), GPIO.input()
-- GPIO.wait_for_edge(), GPIO.add_event_detect(), GPIO.event_detected(), GPIO.add_event_callback(), GPIO.remove_event_detect()
-- GPIO.gpio_function(), GPIO.start(), GPIO.ChangeFrequency(), GPIO.ChangeDutyCycle(), GPIO.stop(), GPIO.cleanup()
+- GPIO.wait_for_edge(), GPIO.add_event_detect(), GPIO.event_detected(), GPIO.add_event_callback()
+- GPIO.remove_event_detect(), GPIO.gpio_function(), GPIO.PWM.start(), GPIO.PWM.ChangeFrequency()
+- GPIO.PWM.ChangeDutyCycle(), GPIO.PWM.stop(), GPIO.PWM.cleanup()
 
 ### Supported versions
 
-- Python: 3.8–3.12
+- Python: 3.10–3.14 and PyPy 3.11
 
 ## Documentation
 
